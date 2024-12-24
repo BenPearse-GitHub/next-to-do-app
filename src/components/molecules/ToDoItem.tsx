@@ -16,10 +16,12 @@ const ToDoItem = ({
     <div className="flex flex-row gap-2 align-middle">
       <Checkbox
         id={id}
-        defaultChecked={complete}
+        checked={complete}
         onCheckedChange={() => handleCompletionChange(!complete, id)}
       />
-      <label htmlFor={id}>{name}</label>
+      <label className={complete ? "line-through" : ""} htmlFor={id}>
+        {name}
+      </label>
     </div>
   );
 };
