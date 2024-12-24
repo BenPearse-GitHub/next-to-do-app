@@ -1,9 +1,8 @@
 "use client";
 
 import React, { SyntheticEvent } from "react";
-import { Input } from "../ui/input";
 import { IToDoItem } from "@/types/todoList";
-import { Button } from "../ui/button";
+import ToDoForm from "../organisms/ToDoForm";
 
 const ToDoList = () => {
   const [toDoItems, setToDoItems] = React.useState<IToDoItem[]>([]);
@@ -33,17 +32,9 @@ const ToDoList = () => {
   };
 
   return (
-    <div className="container-sm mx-auto">
+    <div className="container mx-auto h-screen p-4 border">
       <h1>ToDoList</h1>
-      <form onSubmit={(event) => handleAddToDoItem(event)}>
-        <Input
-          id="to-do-input"
-          name="toDoInput"
-          type="text"
-          placeholder="Enter a new to do item"
-        />
-        <Button type="submit">Add to do</Button>
-      </form>
+      <ToDoForm submitEventHandler={handleAddToDoItem} />
       {toDoItems.map((item, index) => (
         <div key={index}>{item.name}</div>
       ))}
