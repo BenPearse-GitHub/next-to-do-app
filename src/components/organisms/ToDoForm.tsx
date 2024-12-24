@@ -8,7 +8,10 @@ interface ToDoFormProps {
 
 const ToDoForm = ({ submitEventHandler }: ToDoFormProps) => {
   return (
-    <form onSubmit={(event) => submitEventHandler(event)}>
+    <form
+      onSubmit={(event) => submitEventHandler(event)}
+      className="flex flex-row gap-2"
+    >
       <Input
         id="to-do-input"
         name="toDoInput"
