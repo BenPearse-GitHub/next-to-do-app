@@ -32,7 +32,7 @@ const ToDoList = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen p-4 border">
+    <div className="container mx-auto h-screen p-4 border max-w-4xl flex flex-col gap-2">
       <h1>ToDoList</h1>
       <ToDoForm submitEventHandler={handleAddToDoItem} />
       {toDoItems.map((item, index) => (
