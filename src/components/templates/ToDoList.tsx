@@ -4,7 +4,6 @@ import React, { SyntheticEvent } from "react";
 import { IToDoItem } from "@/types/todoList";
 import ToDoForm from "../organisms/ToDoForm";
 import ToDoItem from "../molecules/ToDoItem";
-import { v4 as uuidv4 } from "uuid";
 
 const ToDoList = () => {
   const [toDoItems, setToDoItems] = React.useState<IToDoItem[]>([]);
@@ -24,7 +23,7 @@ const ToDoList = () => {
       const newItem: IToDoItem = {
         name: newToDoName,
         complete: false,
-        id: uuidv4(),
+        id: crypto.randomUUID(),
       };
 
       // Add new to do item to existing list of to do items
