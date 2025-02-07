@@ -15,7 +15,7 @@ const ToDoItem = ({
   handleCompletionChange,
 }: ToDoItemProps) => {
   return (
-    <div className="flex flex-row gap-2 items-center">
+    <div className="flex flex-row gap-2 items-center shadow-md rounded-md px-3 py-1 hover:bg-gray-50">
       <Checkbox
         id={id}
         checked={complete}
