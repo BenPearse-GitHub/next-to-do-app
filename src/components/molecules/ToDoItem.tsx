@@ -1,11 +1,14 @@
 import { IToDoItem } from "@/types/todoList";
 import React from "react";
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
+import { MdOutlineDelete } from "react-icons/md";
 
 interface ToDoItemProps extends IToDoItem {
   id: string;
   name: string;
   handleCompletionChange: (checked: boolean, id: string) => void;
+  handleDelete: (id: string) => void;
 }
 
 const ToDoItem = ({
@@ -13,6 +16,7 @@ const ToDoItem = ({
   name,
   complete = false,
   handleCompletionChange,
+  handleDelete,
 }: ToDoItemProps) => {
   return (
     <div className="flex flex-row gap-2 items-center shadow-md rounded-md px-3 py-1 hover:bg-gray-50">
@@ -24,6 +28,14 @@ const ToDoItem = ({
       <label className={complete ? "line-through" : ""} htmlFor={id}>
         {name}
       </label>
+      <Button
+        size="icon"
+        variant="ghost"
+        className="rounded-full justify-self-end"
+        onClick={() => handleDelete(id)}
+      >
+        <MdOutlineDelete />
+      </Button>
     </div>
   );
 };

@@ -45,6 +45,12 @@ const ToDoList = () => {
     }
   };
 
+  const handleToDoDelete = (id: string) => {
+    setToDoItems((prevToDoItems) =>
+      prevToDoItems.filter((item) => item.id !== id)
+    );
+  };
+
   return (
     <div className="container mx-auto h-screen p-4 border max-w-4xl flex flex-col gap-2">
       <h1>ToDoList</h1>
@@ -56,6 +62,7 @@ const ToDoList = () => {
             name={item.name}
             complete={item.complete}
             handleCompletionChange={handleToDoCompletionToggle}
+            handleDelete={handleToDoDelete}
           />
         </div>
       ))}
