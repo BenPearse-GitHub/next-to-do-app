@@ -3,7 +3,7 @@
 import React, { SyntheticEvent } from "react";
 import { IToDoItem } from "@/types/todoList";
 import ToDoForm from "../organisms/ToDoForm";
-import ToDoItem from "../molecules/ToDoItem";
+import ToDoItem from "../molecules/ToDoItem/ToDoItem";
 
 const ToDoList = () => {
   const [toDoItems, setToDoItems] = React.useState<IToDoItem[]>([]);
