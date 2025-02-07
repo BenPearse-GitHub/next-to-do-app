@@ -1,8 +1,8 @@
 import React from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 
-interface ToDoFormProps {
+export interface ToDoFormProps {
   submitEventHandler: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -17,6 +17,7 @@ const ToDoForm = ({ submitEventHandler }: ToDoFormProps) => {
         name="toDoInput"
         type="text"
         placeholder="Enter a new to do item"
+        role="textbox"
       />
       <Button type="submit">Add to do</Button>
     </form>

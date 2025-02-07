@@ -2,7 +2,7 @@
 
 import React, { SyntheticEvent } from "react";
 import { IToDoItem } from "@/types/todoList";
-import ToDoForm from "../organisms/ToDoForm";
+import ToDoForm from "../organisms/ToDoForm/ToDoForm";
 import ToDoItem from "../molecules/ToDoItem/ToDoItem";
 
 const ToDoList = () => {
