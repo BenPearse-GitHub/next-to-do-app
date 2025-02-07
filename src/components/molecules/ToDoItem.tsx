@@ -3,17 +3,19 @@ import React from "react";
 import { Checkbox } from "../ui/checkbox";
 
 interface ToDoItemProps extends IToDoItem {
-  handleCompletionChange: (checked: boolean, name: string) => void;
+  id: string;
+  name: string;
+  handleCompletionChange: (checked: boolean, id: string) => void;
 }
 
 const ToDoItem = ({
   id,
   name,
-  complete,
+  complete = false,
   handleCompletionChange,
 }: ToDoItemProps) => {
   return (
-    <div className="flex flex-row gap-2 align-middle">
+    <div className="flex flex-row gap-2 items-center">
       <Checkbox
         id={id}
         checked={complete}

@@ -30,16 +30,19 @@ const ToDoList = () => {
       setToDoItems((prevToDoItems) => [...prevToDoItems, newItem]);
 
       (document.getElementById("to-do-input") as HTMLInputElement).value = "";
-      console.log("Added item: ", newItem);
     }
   };
 
   const handleToDoCompletionToggle = (checked: boolean, id: string) => {
-    const tempToDoItems = toDoItems;
-    const itemToUpdate = tempToDoItems.findIndex((item) => item.id === id);
-    tempToDoItems[itemToUpdate].complete = checked;
-    setToDoItems(tempToDoItems);
-    console.log("Updated item: ", itemToUpdate);
+    const indexToUpdate = toDoItems.findIndex((item) => item.id === id);
+
+    if (indexToUpdate !== -1) {
+      // Clone the list with spreader operator otherwise React won't see the state change
+      const tempToDoItems = [...toDoItems];
+      tempToDoItems[indexToUpdate].complete = checked;
+
+      setToDoItems(tempToDoItems);
+    }
   };
 
   return (
