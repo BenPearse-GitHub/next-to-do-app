@@ -1,12 +1,10 @@
 import { IToDoItem } from "@/types/todoList";
 import React from "react";
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
+import { Checkbox } from "../../ui/checkbox";
+import { Button } from "../../ui/button";
 import { MdOutlineDelete } from "react-icons/md";
 
-interface ToDoItemProps extends IToDoItem {
-  id: string;
-  name: string;
+export interface ToDoItemProps extends IToDoItem {
   handleCompletionChange: (checked: boolean, id: string) => void;
   handleDelete: (id: string) => void;
 }
@@ -19,10 +17,12 @@ const ToDoItem = ({
   handleDelete,
 }: ToDoItemProps) => {
   return (
-    <div className="flex flex-row gap-2 items-center justify-between shadow-md rounded-md px-3 py-1 hover:bg-gray-50">
+    <div
+      id={id}
+      className="flex flex-row gap-2 items-center justify-between shadow-md rounded-md px-3 py-1 hover:bg-gray-50"
+    >
       <div className="flex gap-2 items-center">
         <Checkbox
-          id={id}
           checked={complete}
           onCheckedChange={() => handleCompletionChange(!complete, id)}
         />
