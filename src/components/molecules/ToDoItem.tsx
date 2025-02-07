@@ -19,15 +19,17 @@ const ToDoItem = ({
   handleDelete,
 }: ToDoItemProps) => {
   return (
-    <div className="flex flex-row gap-2 items-center shadow-md rounded-md px-3 py-1 hover:bg-gray-50">
-      <Checkbox
-        id={id}
-        checked={complete}
-        onCheckedChange={() => handleCompletionChange(!complete, id)}
-      />
-      <label className={complete ? "line-through" : ""} htmlFor={id}>
-        {name}
-      </label>
+    <div className="flex flex-row gap-2 items-center justify-between shadow-md rounded-md px-3 py-1 hover:bg-gray-50">
+      <div className="flex gap-2 items-center">
+        <Checkbox
+          id={id}
+          checked={complete}
+          onCheckedChange={() => handleCompletionChange(!complete, id)}
+        />
+        <label className={complete ? "line-through" : ""} htmlFor={id}>
+          {name}
+        </label>
+      </div>
       <Button
         size="icon"
         variant="ghost"
