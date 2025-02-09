@@ -3,9 +3,9 @@
 import React, { SyntheticEvent } from "react";
 import { IToDoItem } from "@/types/todoList";
 import ToDoForm from "../organisms/ToDoForm/ToDoForm";
-import ToDoItem from "../molecules/ToDoItem/ToDoItem";
+import ToDoList from "../organisms/ToDoList/ToDoList";
 
-const ToDoList = () => {
+const ToDoScreen = () => {
   const [toDoItems, setToDoItems] = React.useState<IToDoItem[]>([]);
 
   const handleAddToDoItem = (e: SyntheticEvent) => {
@@ -55,19 +55,13 @@ const ToDoList = () => {
     <div className="container mx-auto h-screen p-4 border max-w-4xl flex flex-col gap-2">
       <h1>ToDoList</h1>
       <ToDoForm submitEventHandler={handleAddToDoItem} />
-      {toDoItems.map((item) => (
-        <div key={item.id}>
-          <ToDoItem
-            id={item.id}
-            name={item.name}
-            complete={item.complete}
-            handleCompletionChange={handleToDoCompletionToggle}
-            handleDelete={handleToDoDelete}
-          />
-        </div>
-      ))}
+      <ToDoList
+        toDoItems={toDoItems}
+        onCompleteChange={handleToDoCompletionToggle}
+        onDelete={handleToDoDelete}
+      />
     </div>
   );
 };
 
-export default ToDoList;
+export default ToDoScreen;

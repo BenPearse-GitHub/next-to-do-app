@@ -1,5 +1,5 @@
-import ToDoList from "@/components/templates/ToDoList";
+import ToDoScreen from "@/components/templates/ToDoScreen";
 
 export default function Home() {
-  return <ToDoList />;
+  return <ToDoScreen />;
 }
