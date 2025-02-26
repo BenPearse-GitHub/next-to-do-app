@@ -2,7 +2,7 @@ import ToDoItem from "@/components/molecules/ToDoItem/ToDoItem";
 import { IToDoItem } from "@/types/todoList";
 import React from "react";
 
-interface ToDoListProps {
+export interface ToDoListProps {
   toDoItems: IToDoItem[];
   onCompleteChange: (checked: boolean, id: string) => void;
   onDelete: (id: string) => void;
