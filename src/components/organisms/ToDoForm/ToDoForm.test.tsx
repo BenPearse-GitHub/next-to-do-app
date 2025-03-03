@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ToDoForm, { ToDoFormProps } from "./ToDoForm";
 
 const defaultToDoFormProps: ToDoFormProps = {
-  submitEventHandler: jest.fn(),
+  submitEventHandler: jest.fn((e) => e.preventDefault()),
 };
 
 describe("ToDoForm", () => {
@@ -24,7 +24,7 @@ describe("ToDoForm", () => {
     render(<ToDoForm {...defaultToDoFormProps} />);
 
     const button = screen.getByRole("button");
-    button.click();
+    fireEvent.click(button);
 
     expect(defaultToDoFormProps.submitEventHandler).toHaveBeenCalled();
   });
