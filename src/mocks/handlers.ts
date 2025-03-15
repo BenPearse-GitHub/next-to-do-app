@@ -4,8 +4,9 @@ import {
   HttpResponse,
   PathParams,
 } from "msw";
+import { v4 as uuidv4 } from "uuid";
 import { mockToDoItems } from "./data";
-import { IToDoItem } from "@/types/todoList";
+import { ToDoItem } from "@/types/todoList";
 
 interface IaddTodoRequestBody {
   name: string;
@@ -54,12 +55,11 @@ export const handlers = [
     IaddTodoResponseBody,
     "http://localhost:5001/todos"
   >("http://localhost:5001/todos", async ({ request }) => {
-    console.log(await request.json());
     const requestJson = await request.json();
     const newTodoName = requestJson.name;
 
-    const mockNewTodo: IToDoItem = {
-      id: crypto.randomUUID(),
+    const mockNewTodo: ToDoItem = {
+      id: uuidv4(),
       name: newTodoName,
       complete: false,
     };
@@ -71,10 +71,11 @@ export const handlers = [
     IupdateTodoResponseSuccessBody | IupdateTodoResponseNotFoundBody,
     "http://localhost:5001/todos/:id"
   >("http://localhost:5001/todos/:id", async ({ params, request }) => {
+    const { id } = params;
     const requestJson = await request.json();
 
     //search todo items
-    const todoToUpdate = mockToDoItems.find((todo) => todo.id === params.id);
+    const todoToUpdate = mockToDoItems.find((todo) => todo.id === id);
 
     //if it exists, update todo item
     if (todoToUpdate) {
@@ -99,7 +100,8 @@ export const handlers = [
     IdeleteTodoResponseBody,
     "http://localhost:5001/todos/:id"
   >("http://localhost:5001/todos/:id", async ({ params }) => {
-    const todoToDelete = mockToDoItems.find((todo) => todo.id === params.id);
+    const { id } = params;
+    const todoToDelete = mockToDoItems.find((todo) => todo.id === id);
 
     if (todoToDelete) {
       return HttpResponse.json({ message: "Todo deleted" });

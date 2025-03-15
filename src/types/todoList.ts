@@ -1,5 +1,8 @@
-export interface IToDoItem {
+export type ToDoItem = IupdateTodoItemParameters & { id: todoId };
+
+export interface IupdateTodoItemParameters {
   name: string;
   complete: boolean;
-  id: string;
 }
+
+export type todoId = string;
