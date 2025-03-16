@@ -1,12 +1,12 @@
 "use client";
 
 import React, { SyntheticEvent } from "react";
-import { IToDoItem } from "@/types/todoList";
 import ToDoForm from "../organisms/ToDoForm/ToDoForm";
 import ToDoList from "../organisms/ToDoList/ToDoList";
+import { ToDoItem } from "@/types/todoList";
 
 const ToDoScreen = () => {
-  const [toDoItems, setToDoItems] = React.useState<IToDoItem[]>([]);
+  const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
 
   const handleAddToDoItem = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const ToDoScreen = () => {
 
     if (newToDoName.length !== 0) {
       // Define new to do item
-      const newItem: IToDoItem = {
+      const newItem: ToDoItem = {
         name: newToDoName,
         complete: false,
         id: crypto.randomUUID(),

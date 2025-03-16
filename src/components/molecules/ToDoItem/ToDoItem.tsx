@@ -1,10 +1,10 @@
-import { IToDoItem } from "@/types/todoList";
+import { ToDoItem as ToDoItemType } from "@/types/todoList";
 import React from "react";
 import { Checkbox } from "../../ui/checkbox";
 import { Button } from "../../ui/button";
 import { MdOutlineDelete } from "react-icons/md";
 
-export interface ToDoItemProps extends IToDoItem {
+export interface ToDoItemProps extends ToDoItemType {
   handleCompletionChange: (checked: boolean, id: string) => void;
   handleDelete: (id: string) => void;
 }
