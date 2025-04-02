@@ -7,6 +7,7 @@ import { ToDoItem } from "@/types/todoList";
 import { useGetAllTodos } from "@/hooks/getAllTodos";
 import { useCreateTodo } from "@/hooks/createTodo";
 import { useUpdateTodo } from "@/hooks/updateTodo";
+import { useDeleteTodo } from "@/hooks/deleteTodo";
 
 const ToDoScreen = () => {
   const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
@@ -14,6 +15,7 @@ const ToDoScreen = () => {
   const { data } = useGetAllTodos();
   const { mutate: createTodoMutation } = useCreateTodo();
   const { mutate: updateTodoMutation } = useUpdateTodo();
+  const { mutate: deleteTodoMutation } = useDeleteTodo();
 
   const handleAddToDoItem = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -42,9 +44,7 @@ const ToDoScreen = () => {
   };
 
   const handleToDoDelete = (id: string) => {
-    setToDoItems((prevToDoItems) =>
-      prevToDoItems.filter((item) => item.id !== id)
-    );
+    deleteTodoMutation(id);
   };
 
   //Load todo items
