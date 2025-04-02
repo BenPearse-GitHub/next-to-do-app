@@ -1,12 +1,19 @@
 "use client";
 
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent, useEffect } from "react";
 import ToDoForm from "../organisms/ToDoForm/ToDoForm";
 import ToDoList from "../organisms/ToDoList/ToDoList";
 import { ToDoItem } from "@/types/todoList";
+import { useGetAllTodos } from "@/hooks/getAllTodos";
+import { useCreateTodo } from "@/hooks/createTodo";
+import { useUpdateTodo } from "@/hooks/updateTodo";
 
 const ToDoScreen = () => {
   const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
+
+  const { data } = useGetAllTodos();
+  const { mutate: createTodoMutation } = useCreateTodo();
+  const { mutate: updateTodoMutation } = useUpdateTodo();
 
   const handleAddToDoItem = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -19,29 +26,18 @@ const ToDoScreen = () => {
     const newToDoName = target.toDoInput.value;
 
     if (newToDoName.length !== 0) {
-      // Define new to do item
-      const newItem: ToDoItem = {
-        name: newToDoName,
-        complete: false,
-        id: crypto.randomUUID(),
-      };
-
-      // Add new to do item to existing list of to do items
-      setToDoItems((prevToDoItems) => [...prevToDoItems, newItem]);
+      createTodoMutation(newToDoName);
 
       (document.getElementById("to-do-input") as HTMLInputElement).value = "";
     }
   };
 
   const handleToDoCompletionToggle = (checked: boolean, id: string) => {
-    const indexToUpdate = toDoItems.findIndex((item) => item.id === id);
+    const todoToUpdate = toDoItems.find((item) => item.id === id);
 
-    if (indexToUpdate !== -1) {
-      // Clone the list with spreader operator otherwise React won't see the state change
-      const tempToDoItems = [...toDoItems];
-      tempToDoItems[indexToUpdate].complete = checked;
-
-      setToDoItems(tempToDoItems);
+    if (todoToUpdate) {
+      todoToUpdate.complete = checked;
+      updateTodoMutation({ id, updatedTodo: todoToUpdate });
     }
   };
 
@@ -50,6 +46,13 @@ const ToDoScreen = () => {
       prevToDoItems.filter((item) => item.id !== id)
     );
   };
+
+  //Load todo items
+  useEffect(() => {
+    if (data) {
+      setToDoItems(data);
+    }
+  }, [data]);
 
   return (
     <div className="container mx-auto h-screen p-4 border max-w-4xl flex flex-col gap-2">
