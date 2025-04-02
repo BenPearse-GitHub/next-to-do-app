@@ -1,13 +1,13 @@
 import { todoId, ToDoItem, IupdateTodoItemParameters } from "@/types/todoList";
 
-interface IApiMessage {
+export interface IApiMessage {
   message: string;
 }
 
 //Get all todos
 export const getTodos = async (): Promise<ToDoItem[]> => {
   const response = await fetch("http://localhost:5001/todos");
-  const data = response.json();
+  const data: ToDoItem[] = await response.json();
   return data;
 };
 
@@ -18,7 +18,7 @@ export const createTodo = async (newTodoName: string): Promise<ToDoItem> => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name: newTodoName }),
   });
-  const data = response.json();
+  const data: ToDoItem = await response.json();
   return data;
 };
 
@@ -32,7 +32,7 @@ export const updateTodo = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...updatedTodo }),
   });
-  const data = response.json();
+  const data: ToDoItem | IApiMessage = await response.json();
   return data;
 };
 
@@ -41,6 +41,6 @@ export const deleteTodo = async (id: todoId): Promise<IApiMessage> => {
   const response = await fetch(`http://localhost:5001/todos/${id}`, {
     method: "DELETE",
   });
-  const data = response.json();
+  const data: IApiMessage = await response.json();
   return data;
 };
